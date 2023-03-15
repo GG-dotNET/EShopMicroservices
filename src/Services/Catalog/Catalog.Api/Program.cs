@@ -1,3 +1,5 @@
+using Catalog.Api.Data;
+using Catalog.Api.Repositories;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.API", Version = "v1" });
 });
+
+services.AddScoped<ICatalogContext, CatalogContext>();
+services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 if (env.IsDevelopment())
